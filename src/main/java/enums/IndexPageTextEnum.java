@@ -1,3 +1,4 @@
+package enums;
 
 public enum IndexPageTextEnum {
     TEXT_1("To include good practices and ideas from successful EPAM projec"),

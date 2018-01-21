@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 import static java.lang.System.setProperty;
+import static org.testng.Assert.assertEquals;
 
 public class SeleniumTest {
     private WebDriver driver;
@@ -45,24 +45,24 @@ public class SeleniumTest {
     @Test(groups = ("smoke"))
     public void LoginJDISiteTest() {
         driver.manage().window().maximize();
+
+        //Open test site by URL
         driver.navigate().to("https://jdi-framework.github.io/tests");
-        Assert.assertEquals(driver.getTitle(), "Index Page");
+        assertEquals(driver.getTitle(), "Index Page");
 
-        WebElement profileMenu = driver.findElement(By.cssSelector(".dropdown.uui-profile-menu"));
-        profileMenu.click();
+        //Perform login
+        driver.findElement(By.cssSelector(".dropdown.uui-profile-menu")).click();
+        driver.findElement(By.id("Login")).sendKeys("epam");
+        driver.findElement(By.id("Password")).sendKeys("1234");
+        driver.findElement(By.cssSelector(".btn-login")).click();
 
-        WebElement login = driver.findElement(By.id("Login"));
-        WebElement password = driver.findElement(By.id("Password"));
-
-        login.sendKeys("epam");
-        password.sendKeys("1234");
-
-        WebElement enterButton = driver.findElement(By.cssSelector(".btn-login"));
-        enterButton.click();
+        //Assert User name in the left-top side of screen and Browser title
         WebElement userName = driver.findElement(By.xpath("//div[@class='profile-photo']/span"));
-        Assert.assertEquals(userName.getText(), "PITER CHAILOVSKII");
+        assertEquals(userName.getText(), "PITER CHAILOVSKII");
+        assertEquals(driver.getTitle(), "Index Page");
 
+        //Assert the main header
         WebElement mainHeader = driver.findElement(By.cssSelector(".main-title.text-center"));
-        Assert.assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
+        assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
     }
 }

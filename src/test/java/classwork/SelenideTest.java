@@ -1,5 +1,6 @@
 package classwork;
 
+import base.BaseSelenide;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -12,7 +13,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class SelenTest extends BaseSelenide {
+public class SelenideTest extends BaseSelenide {
 
     @AfterMethod
     public void tearDown() {
