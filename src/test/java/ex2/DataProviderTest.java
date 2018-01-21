@@ -1,6 +1,6 @@
 package ex2;
 
-import ex1.BaseTest;
+import base.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -31,4 +31,5 @@ public class DataProviderTest extends BaseTest {
         Assert.assertEquals(textBenefit.get(2).getText().replace("\n", " "), text2);
         Assert.assertEquals(textBenefit.get(3).getText().replace("\n", " "), text3);
     }
+
 }
