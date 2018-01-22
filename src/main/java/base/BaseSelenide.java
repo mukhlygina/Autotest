@@ -3,9 +3,6 @@ package base;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeSuite;
 
-/**
- * @author 473601
- */
 public abstract class BaseSelenide {
 
     @BeforeSuite

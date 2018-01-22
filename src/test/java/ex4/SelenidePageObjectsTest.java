@@ -26,6 +26,10 @@ public class SelenidePageObjectsTest {
     public void setUpPages() {
         Configuration.browser = "chrome";
         Configuration.startMaximized = true;
+        Configuration.timeout = 6000;
+        Configuration.pollingInterval = 200;
+        Configuration.collectionsPollingInterval = 300;
+
         indexPage = open("https://jdi-framework.github.io/tests", SelenideIndexPage.class);
     }
 
