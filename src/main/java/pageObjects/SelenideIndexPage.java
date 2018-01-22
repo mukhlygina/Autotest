@@ -3,14 +3,13 @@ package pageObjects;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
 
 public class SelenideIndexPage {
-   @FindBy(how = How.CSS, using = ".dropdown.uui-profile-menu")
+   @FindBy(css = ".dropdown.uui-profile-menu")
     private SelenideElement loginFormButton;
 
     @FindBy(css = "#Login")
