@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
 
 public class SelenideIndexPage {
-   @FindBy(css = ".dropdown.uui-profile-menu")
+   @FindBy(css = ".uui-profile-menu .dropdown-toggle")
     private SelenideElement loginFormButton;
 
     @FindBy(css = "#Login")

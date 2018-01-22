@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -22,6 +23,7 @@ public class ChromeTest {
             " DOLORE EU FUGIAT NULLA PARIATUR.";
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
+        setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -44,7 +46,7 @@ public class ChromeTest {
         driver.findElement(By.cssSelector(".btn-login")).click();
 
         //Assert User name in the left-top side of screen and Browser title
-        WebElement userName = driver.findElement(By.xpath("//div[@class='profile-photo']/span"));
+        WebElement userName = driver.findElement(By.xpath("//div[@class='profile-photo']"));
         assertEquals(userName.getText(), "PITER CHAILOVSKII");
         assertEquals(driver.getTitle(), "Index Page");
 
