@@ -19,7 +19,7 @@ public class SelenideIndexPage {
      @FindBy(css = "#Password")
     private SelenideElement passordInput;
 
-    @FindBy(css = ".form-horizontal [type='submit2']")
+    @FindBy(css = ".form-horizontal [type='submit']")
     private SelenideElement submitButton;
 
     @Step
