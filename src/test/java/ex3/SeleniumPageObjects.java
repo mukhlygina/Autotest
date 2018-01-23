@@ -29,6 +29,7 @@ public class SeleniumPageObjects {
     public void loginTest() {
         //Open test site
         indexPage.open(driver);
+
         //Perform login
         indexPage.login("epam", "1234");
 
@@ -37,7 +38,7 @@ public class SeleniumPageObjects {
         indexPage.checkPageTitle(driver);
 
         //Assert that there are 4 images on the Home Page
-        indexPage.checkIcons();
+        indexPage.checkImages();
 
         //Assert that there are 4 texts on the Home Page
         indexPage.checkTextsUnderImages();

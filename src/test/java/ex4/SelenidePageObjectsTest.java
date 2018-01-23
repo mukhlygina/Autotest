@@ -2,7 +2,6 @@ package ex4;
 
 import com.codeborne.selenide.Configuration;
 import listeners.AllureAttachmentListener;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -19,7 +18,6 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 @Stories({"Login tests"})
 
 public class SelenidePageObjectsTest {
-    private WebDriver driver;
     private SelenideIndexPage indexPage;
 
     @BeforeClass
@@ -40,7 +38,22 @@ public class SelenidePageObjectsTest {
 
     @Test
     public void loginTest() {
-       //Perform login
+        //Perform login
         indexPage.login("epam", "1234");
+
+        //Assert User name in the left-top side of screen
+        indexPage.checkLoggedUserName("PITER CHAILOVSKII");
+
+        //Assert that there are 4 images on the Home Page
+        indexPage.checkImages();
+
+        //Assert that there are 4 texts on the Home Page
+        indexPage.checkTextsUnderImages();
+
+        //Assert the main header
+        indexPage.checkMainHeader("EPAM FRAMEWORK WISHES…");
+
+        //Assert the main text
+        indexPage.checkMainText();
     }
 }

@@ -58,7 +58,7 @@ public class SeleniumIndexPage {
         Assert.assertEquals(profilePhoto.getText(), name);
     }
 
-    public void checkIcons() {
+    public void checkImages() {
         assertEquals(iconsBenefit.size(), 4);
         for (WebElement icon : iconsBenefit) {
             assertTrue(icon.isDisplayed());
@@ -71,7 +71,6 @@ public class SeleniumIndexPage {
 
     public void checkTextsUnderImages() {
         IndexPageTextEnum[] values = IndexPageTextEnum.values();
-
 
         assertEquals(textsBenefit.size(), 4);
 
