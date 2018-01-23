@@ -8,6 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static org.testng.Assert.assertEquals;
 
 public class SelenideIndexPage {
     @FindBy(css = ".uui-profile-menu .dropdown-toggle")
@@ -68,11 +69,10 @@ public class SelenideIndexPage {
     @Step
     public void checkTextsUnderImages() {
         IndexPageTextEnum[] values = IndexPageTextEnum.values();
-
         textsBenefit.shouldHaveSize(4);
 
         for(int i = 0; i < 4; i++) {
-            textsBenefit.get(i).shouldHave(text(values[i].text));
+            assertEquals(textsBenefit.get(i).getText().replace("\n", " "), values[i].text);
         }
     }
 
