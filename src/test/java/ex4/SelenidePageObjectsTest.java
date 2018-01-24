@@ -2,15 +2,18 @@ package ex4;
 
 import com.codeborne.selenide.Configuration;
 import listeners.AllureAttachmentListener;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import pageObjects.DifferentElementsPage;
+import pageObjects.HeaderMenuTab;
 import pageObjects.SelenideIndexPage;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 @Listeners(AllureAttachmentListener.class)
@@ -31,13 +34,13 @@ public class SelenidePageObjectsTest {
         indexPage = open("https://jdi-framework.github.io/tests", SelenideIndexPage.class);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         closeWebDriver();
     }
 
     @Test
-    public void loginTest() {
+    public void differentElementsPageTest() {
         //Perform login
         indexPage.login("epam", "1234");
 
@@ -55,5 +58,44 @@ public class SelenidePageObjectsTest {
 
         //Assert the main text
         indexPage.checkMainText();
+
+        //Click on "Service" subcategory in the header and check that drop down contains options
+        HeaderMenuTab menu = page(HeaderMenuTab.class);
+        menu.selectService();
+        menu.checkServiceDropdown();
+
+        //Open through the header menu Service -> Different Elements Page
+        menu.openDifferentElementsPage();
+
+        //Check interface on Service page, it contains all needed elements
+        DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
+        differentElementsPage.checkDifferentElementsPage();
+
+        //Select and assert checkboxes
+        differentElementsPage.selectCheckboxes();
+
+        //Select radio
+        differentElementsPage.selectRadiobuttons();
+
+        //Select in dropdown
+        differentElementsPage.selectDropdown();
+
+        //Check in logs section selected values and status
+        differentElementsPage.checkLogsSection();
+        differentElementsPage.selectCheckboxes();
+    }
+
+    @Test
+    public void datesPageTest() {
+        //Perform login
+        indexPage.login("epam", "1234");
+
+        //Assert User name in the left-top side of screen
+        indexPage.checkLoggedUserName("PITER CHAILOVSKII");
+
+        //Open Service -> Dates
+        HeaderMenuTab menu = page(HeaderMenuTab.class);
+        menu.selectService();
+        menu.openDatesPage();
     }
 }
