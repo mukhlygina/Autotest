@@ -9,7 +9,8 @@
         </groups>
 
         <classes>
-            <class name="ex2.GroupTest"/>
+            <class name="ex2.GroupTestClass1"/>
+            <class name="ex2.GroupTestClass3"/>
         </classes>
     </test>
 </suite>

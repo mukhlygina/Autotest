@@ -10,7 +10,7 @@ import pageObjects.SeleniumIndexPage;
 
 public class SeleniumPageObjects {
     private WebDriver driver;
-    SeleniumIndexPage indexPage;
+    private SeleniumIndexPage indexPage;
 
     @BeforeClass
     public void setUpPages() {

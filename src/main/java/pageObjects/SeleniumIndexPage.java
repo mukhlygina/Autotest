@@ -24,7 +24,7 @@ public class SeleniumIndexPage {
     @FindBy(css = ".form-horizontal [type='submit']")
     private WebElement submitButton;
 
-    @FindBy(xpath = "//div[@class='profile-photo']")
+    @FindBy(css = ".profile-photo")
     private WebElement profilePhoto;
 
     @FindBy(css = ".benefit-txt")

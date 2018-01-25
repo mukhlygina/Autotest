@@ -2,10 +2,8 @@ package ex4;
 
 import com.codeborne.selenide.Configuration;
 import listeners.AllureAttachmentListener;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import pageObjects.DatesPage;
 import pageObjects.DifferentElementsPage;
 import pageObjects.HeaderMenuTab;
 import pageObjects.SelenideIndexPage;
@@ -23,7 +21,7 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class SelenidePageObjectsTest {
     private SelenideIndexPage indexPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUpPages() {
         Configuration.browser = "chrome";
         Configuration.startMaximized = true;
@@ -34,7 +32,7 @@ public class SelenidePageObjectsTest {
         indexPage = open("https://jdi-framework.github.io/tests", SelenideIndexPage.class);
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         closeWebDriver();
     }
@@ -97,5 +95,8 @@ public class SelenidePageObjectsTest {
         HeaderMenuTab menu = page(HeaderMenuTab.class);
         menu.selectService();
         menu.openDatesPage();
+
+        DatesPage datesPage = page(DatesPage.class);
+        datesPage.changeRange(0, 100);
     }
 }

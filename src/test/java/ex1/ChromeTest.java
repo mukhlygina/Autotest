@@ -1,5 +1,6 @@
 package ex1;
 
+import enums.IndexPageTextEnum;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +35,7 @@ public class ChromeTest {
     }
 
     @Test(groups = ("smoke"))
-    public void LoginJDISiteTest() {
+    public void loginJDISiteTest() {
         //Open test site by URL
         driver.navigate().to("https://jdi-framework.github.io/tests");
         assertEquals(driver.getTitle(), "Index Page");
@@ -57,21 +58,18 @@ public class ChromeTest {
             assertTrue(icon.isDisplayed());
         }
 
+        //Assert that there are 4 texts on the Home Page
         List<WebElement> textBenefit = driver.findElements(By.cssSelector(".benefit-txt"));
-        assertEquals(textBenefit.size(), 4);
-        assertEquals(textBenefit.get(0).getText().replace("\n", " "),
-                "To include good practices and ideas from successful EPAM projec");
-        assertEquals(textBenefit.get(1).getText().replace("\n", " "),
-                "To be flexible and customizable");
-        assertEquals(textBenefit.get(2).getText().replace("\n", " "),
-                "To be multiplatform");
-        assertEquals(textBenefit.get(3).getText().replace("\n", " "),
-                "Already have good base (about 20 internal and some external projects), wish to get more…");
+        IndexPageTextEnum[] values = IndexPageTextEnum.values();
+        for(int i = 0; i < 4; i++) {
+            assertEquals(textBenefit.get(i).getText().replace("\n", " "), values[i].text);
+        }
 
         //Assert the main header
         WebElement mainHeader = driver.findElement(By.cssSelector(".main-title.text-center"));
         assertEquals(mainHeader.getText(), "EPAM FRAMEWORK WISHES…");
 
+        //Assert the main text
         WebElement mainTextElement = driver.findElement(By.cssSelector(".main-txt.text-center"));
         assertEquals(mainTextElement.getText(), mainText);
     }
