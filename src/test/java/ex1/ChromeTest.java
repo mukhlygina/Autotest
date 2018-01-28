@@ -61,7 +61,7 @@ public class ChromeTest {
         //Assert that there are 4 texts on the Home Page
         List<WebElement> textBenefit = driver.findElements(By.cssSelector(".benefit-txt"));
         IndexPageTextEnum[] values = IndexPageTextEnum.values();
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < values.length; i++) {
             assertEquals(textBenefit.get(i).getText().replace("\n", " "), values[i].text);
         }
 

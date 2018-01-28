@@ -1,5 +1,6 @@
 package ex3;
 
+import enums.UserEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -28,14 +29,14 @@ public class SeleniumPageObjects {
     @Test
     public void loginTest() {
         //Open test site
-        indexPage.open(driver);
+        indexPage.open();
 
         //Perform login
-        indexPage.login("epam", "1234");
+        indexPage.login(UserEnum.PITER_CHAILOVSKII.login, UserEnum.PITER_CHAILOVSKII.password);
 
         //Assert User name in the left-top side of screen and Browser title
-        indexPage.checkLoggedUserName("PITER CHAILOVSKII");
-        indexPage.checkPageTitle(driver);
+        indexPage.checkLoggedUserName(UserEnum.PITER_CHAILOVSKII.name);
+        indexPage.checkPageTitle();
 
         //Assert that there are 4 images on the Home Page
         indexPage.checkImages();

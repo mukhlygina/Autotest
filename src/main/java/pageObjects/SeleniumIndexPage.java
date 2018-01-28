@@ -12,6 +12,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class SeleniumIndexPage {
+
+    private WebDriver driver;
+
+    public SeleniumIndexPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
     @FindBy(css = ".uui-profile-menu .dropdown-toggle")
     private WebElement loginFormButton;
 
@@ -39,7 +46,7 @@ public class SeleniumIndexPage {
     @FindBy(css = ".main-txt.text-center")
     private WebElement mainText;
 
-    public void open(WebDriver driver) {
+    public void open() {
         driver.navigate().to("https://jdi-framework.github.io/tests/index.htm");
     }
 
@@ -50,7 +57,7 @@ public class SeleniumIndexPage {
         submitButton.click();
     }
 
-    public void checkPageTitle(WebDriver driver) {
+    public void checkPageTitle() {
         assertEquals(driver.getTitle(), "Index Page");
     }
 

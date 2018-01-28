@@ -17,7 +17,7 @@ public class HeaderMenuTab {
     @FindBy(xpath = "//a[text() = 'Dates']")
     private SelenideElement dates;
 
-    public void selectService() {
+    public void selectServiceDropdown() {
         service.click();
     }
 

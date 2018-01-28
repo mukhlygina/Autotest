@@ -1,6 +1,7 @@
 package ex4;
 
 import com.codeborne.selenide.Configuration;
+import enums.UserEnum;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.*;
 import pageObjects.DatesPage;
@@ -40,10 +41,10 @@ public class SelenidePageObjectsTest {
     @Test
     public void differentElementsPageTest() {
         //Perform login
-        indexPage.login("epam", "1234");
+        indexPage.login(UserEnum.PITER_CHAILOVSKII.login, UserEnum.PITER_CHAILOVSKII.password);
 
         //Assert User name in the left-top side of screen
-        indexPage.checkLoggedUserName("PITER CHAILOVSKII");
+        indexPage.checkLoggedUserName(UserEnum.PITER_CHAILOVSKII.name);
 
         //Assert that there are 4 images on the Home Page
         indexPage.checkImages();
@@ -59,7 +60,7 @@ public class SelenidePageObjectsTest {
 
         //Click on "Service" subcategory in the header and check that drop down contains options
         HeaderMenuTab menu = page(HeaderMenuTab.class);
-        menu.selectService();
+        menu.selectServiceDropdown();
         menu.checkServiceDropdown();
 
         //Open through the header menu Service -> Different Elements Page
@@ -86,17 +87,17 @@ public class SelenidePageObjectsTest {
     @Test
     public void datesPageTest() {
         //Perform login
-        indexPage.login("epam", "1234");
+        indexPage.login(UserEnum.PITER_CHAILOVSKII.login, UserEnum.PITER_CHAILOVSKII.password);
 
         //Assert User name in the left-top side of screen
-        indexPage.checkLoggedUserName("PITER CHAILOVSKII");
+        indexPage.checkLoggedUserName(UserEnum.PITER_CHAILOVSKII.name);
 
         //Open Service -> Dates
         HeaderMenuTab menu = page(HeaderMenuTab.class);
-        menu.selectService();
+        menu.selectServiceDropdown();
         menu.openDatesPage();
 
         DatesPage datesPage = page(DatesPage.class);
-        datesPage.changeRange(0, 100);
+        datesPage.changeRange(30, 70);
     }
 }
