@@ -45,8 +45,8 @@ public class DifferentElementsPage {
         metalRadiobuttons.get(3).click();
     }
 
-    public void selectDropdown() {
-        dropdown.selectOption("Yellow");
+    public void selectDropdown(String option) {
+        dropdown.selectOption(option);
     }
 
     public void checkLogsSection() {

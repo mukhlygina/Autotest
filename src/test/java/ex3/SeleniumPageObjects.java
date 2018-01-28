@@ -1,5 +1,6 @@
 package ex3;
 
+import enums.PageTextEnum;
 import enums.UserEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,7 +46,7 @@ public class SeleniumPageObjects {
         indexPage.checkTextsUnderImages();
 
         //Assert the main header
-        indexPage.checkMainHeader("EPAM FRAMEWORK WISHES…");
+        indexPage.checkMainHeader(PageTextEnum.HOME_PAGE.mainHeader);
 
         //Assert the main text
         indexPage.checkMainText();

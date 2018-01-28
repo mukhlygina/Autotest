@@ -3,6 +3,7 @@ package pageObjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.IndexPageTextEnum;
+import enums.PageTextEnum;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -78,6 +79,7 @@ public class SelenideIndexPage {
 
     @Step
     public void checkMainText() {
-        mainHeader.should(visible);
+        mainText.should(visible);
+        mainText.shouldHave(text(PageTextEnum.HOME_PAGE.mainText));
     }
 }

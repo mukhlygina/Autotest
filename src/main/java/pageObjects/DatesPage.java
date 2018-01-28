@@ -16,10 +16,6 @@ public class DatesPage {
     @FindBy(css = ".uui-slider a:last-child")
     private SelenideElement rightSliderHandle;
 
-    public Integer getStep() {
-        return sliderRange.getSize().width / 4;
-    }
-
     public double getSliderRangeStep() {
         double width = sliderRange.getSize().getWidth();
         return width / 100;
@@ -27,10 +23,14 @@ public class DatesPage {
 
     public void changeRange(int leftRange, int rightRange) {
         sliderRange.scrollTo();
+        double step = getSliderRangeStep();
+
         actions().dragAndDropBy(leftSliderHandle, -300, 0).build().perform();
         actions().dragAndDropBy(rightSliderHandle, -300, 0).build().perform();
-        actions().dragAndDropBy(rightSliderHandle, (int) (getSliderRangeStep() * rightRange), 0).build().perform();
-        actions().dragAndDropBy(leftSliderHandle, (int) (getSliderRangeStep() * leftRange), 0).build().perform();
+
+        actions().dragAndDropBy(rightSliderHandle, (int) (step * rightRange - step/2), 0).build().perform();
+        actions().dragAndDropBy(leftSliderHandle, (int) (step * leftRange - step/2), 0).build().perform();
+
         leftSliderHandle.shouldHave(exactText(String.valueOf(leftRange)));
         rightSliderHandle.shouldHave(exactText(String.valueOf(rightRange)));
     }

@@ -1,6 +1,8 @@
 package ex4;
 
 import com.codeborne.selenide.Configuration;
+import enums.ColorEnum;
+import enums.PageTextEnum;
 import enums.UserEnum;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.*;
@@ -53,7 +55,7 @@ public class SelenidePageObjectsTest {
         indexPage.checkTextsUnderImages();
 
         //Assert the main header
-        indexPage.checkMainHeader("EPAM FRAMEWORK WISHES…");
+        indexPage.checkMainHeader(PageTextEnum.HOME_PAGE.mainHeader);
 
         //Assert the main text
         indexPage.checkMainText();
@@ -77,7 +79,7 @@ public class SelenidePageObjectsTest {
         differentElementsPage.selectRadiobuttons();
 
         //Select in dropdown
-        differentElementsPage.selectDropdown();
+        differentElementsPage.selectDropdown(ColorEnum.Yellow.toString());
 
         //Check in logs section selected values and status
         differentElementsPage.checkLogsSection();
@@ -97,7 +99,10 @@ public class SelenidePageObjectsTest {
         menu.selectServiceDropdown();
         menu.openDatesPage();
 
+        //Using drag-and-drop set Range sliders
         DatesPage datesPage = page(DatesPage.class);
+        datesPage.changeRange(0, 100);
+        datesPage.changeRange(0, 0);
         datesPage.changeRange(30, 70);
     }
 }
