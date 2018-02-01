@@ -5,12 +5,13 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.visible;
+import static org.testng.Assert.assertTrue;
 
 public class DifferentElementsPage {
-    @FindBy(css = "[type = 'checkbox']")
+    @FindBy(css = ".label-checkbox")
     private ElementsCollection checkbox;
 
-    @FindBy(css = "[type='radio']")
+    @FindBy(css = ".label-radio")
     private ElementsCollection metalRadiobuttons;
 
     @FindBy(css = "[value = 'Button']")
@@ -36,28 +37,28 @@ public class DifferentElementsPage {
         metalRadiobuttons.shouldHaveSize(radiobtnNumber);
     }
 
+    public void checkButtons() {
+        button.should(visible);
+        defaultButton.should(visible);
+    }
+
     public void selectCheckboxes(String element) {
         checkbox.stream().filter(item -> item.getText().equals(element))
                 .forEach(item -> item.click());
     }
 
     public void selectRadiobuttons(String metal) {
-        metalRadiobuttons.stream().filter(elem -> elem.getText()
-                .equals(metal))
-                .forEach(elem -> elem.click());
+        metalRadiobuttons.stream().filter(item -> item.getText().equals(metal))
+                .forEach(item -> item.click());
     }
 
     public void selectDropdown(String option) {
         colorsDropdown.selectOption(option);
     }
 
-    public void checkLogsSection() {
-
-    }
-
-    public void checkButtons() {
-        button.should(visible);
-        defaultButton.should(visible);
+    public void checkLogsSection(String name, String condition) {
+        String regex = String.format(".* %s: .* %s", name, condition);
+        assertTrue(log.stream().anyMatch(row -> row.getText().matches(regex)));
     }
 
     public void checkDifferentElementsPage(int checkboxNumber, int radiobtnNumber) {

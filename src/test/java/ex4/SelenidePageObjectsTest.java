@@ -81,8 +81,18 @@ public class SelenidePageObjectsTest {
         differentElementsPage.selectDropdown(ColorEnum.Yellow.toString());
 
         //Check in logs section selected values and status
- //       differentElementsPage.checkLogsSection();
- //       differentElementsPage.selectCheckboxes();
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), "true");
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), "true");
+        differentElementsPage.checkLogsSection("metal", MetalEnum.Selen.toString());
+        differentElementsPage.checkLogsSection("Colors", ColorEnum.Yellow.toString());
+
+        //Unselect checkboxes
+        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Water.toString());
+        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Wind.toString());
+
+        //Check in logs section unselected values and status (true|false)
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), "false");
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), "false");
     }
 
     @Test
