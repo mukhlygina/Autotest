@@ -2,7 +2,14 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.ServiceMenuEnum;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.testng.Assert.assertTrue;
 
 public class HeaderMenuTab {
     @FindBy(css = "li.dropdown a[href = 'page1.htm']")
@@ -23,6 +30,12 @@ public class HeaderMenuTab {
 
     public void checkServiceDropdown() {
         serviceDropdown.shouldHaveSize(6);
+
+        List<String> menuTitles = serviceDropdown.stream()
+                .map(item -> item.getText().toLowerCase()).collect(Collectors.toList());
+
+        Arrays.asList(ServiceMenuEnum.values()).stream()
+                .forEach(enumItem -> assertTrue(menuTitles.contains(enumItem.text.toLowerCase())));
     }
 
     public void openDifferentElementsPage() {

@@ -1,7 +1,6 @@
 package pageObjects;
 
 import enums.IndexPageTextEnum;
-import enums.PageTextEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -86,8 +85,8 @@ public class SeleniumIndexPage {
         }
     }
 
-    public void checkMainText() {
+    public void checkMainText(String text) {
         assertTrue(mainText.isDisplayed());
-        assertEquals(mainText.getText(), PageTextEnum.HOME_PAGE.mainText);
+        assertEquals(mainText.getText(), text);
     }
 }

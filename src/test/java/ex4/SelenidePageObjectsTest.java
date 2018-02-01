@@ -1,9 +1,7 @@
 package ex4;
 
 import com.codeborne.selenide.Configuration;
-import enums.ColorEnum;
-import enums.PageTextEnum;
-import enums.UserEnum;
+import enums.*;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.*;
 import pageObjects.DatesPage;
@@ -70,20 +68,21 @@ public class SelenidePageObjectsTest {
 
         //Check interface on Service page, it contains all needed elements
         DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
-        differentElementsPage.checkDifferentElementsPage();
+        differentElementsPage.checkDifferentElementsPage(4, 4);
 
         //Select and assert checkboxes
-        differentElementsPage.selectCheckboxes();
+        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Water.toString());
+        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Wind.toString());
 
         //Select radio
-        differentElementsPage.selectRadiobuttons();
+        differentElementsPage.selectRadiobuttons(MetalEnum.Selen.toString());
 
         //Select in dropdown
         differentElementsPage.selectDropdown(ColorEnum.Yellow.toString());
 
         //Check in logs section selected values and status
-        differentElementsPage.checkLogsSection();
-        differentElementsPage.selectCheckboxes();
+ //       differentElementsPage.checkLogsSection();
+ //       differentElementsPage.selectCheckboxes();
     }
 
     @Test

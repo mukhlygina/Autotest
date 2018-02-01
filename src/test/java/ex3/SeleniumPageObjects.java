@@ -49,6 +49,6 @@ public class SeleniumPageObjects {
         indexPage.checkMainHeader(PageTextEnum.HOME_PAGE.mainHeader);
 
         //Assert the main text
-        indexPage.checkMainText();
+        indexPage.checkMainText(PageTextEnum.HOME_PAGE.mainText);
     }
 }
