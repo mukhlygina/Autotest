@@ -11,26 +11,33 @@ import pageObjects.SelenideIndexPage;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 
-import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 @Listeners(AllureAttachmentListener.class)
 @Features({"Selenide Test Suite"})
 @Stories({"Login tests"})
-
 public class SelenidePageObjectsTest {
     private SelenideIndexPage indexPage;
+    private HeaderMenuTab menu;
+    private DifferentElementsPage differentElementsPage;
+    private DatesPage datesPage;
 
-    @BeforeMethod
-    public void setUpPages() {
+    @BeforeSuite
+    public void beforeSuit() {
         Configuration.browser = "chrome";
         Configuration.startMaximized = true;
         Configuration.timeout = 6000;
         Configuration.pollingInterval = 200;
         Configuration.collectionsPollingInterval = 300;
+    }
 
-        indexPage = open("https://jdi-framework.github.io/tests", SelenideIndexPage.class);
+    @BeforeMethod
+    public void setUpPages() {
+        indexPage = page(SelenideIndexPage.class);
+        menu = page(HeaderMenuTab.class);
+        differentElementsPage = page(DifferentElementsPage.class);
+        datesPage = page(DatesPage.class);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -40,76 +47,74 @@ public class SelenidePageObjectsTest {
 
     @Test
     public void differentElementsPageTest() {
-        //Perform login
+        //1 Perform login
+        indexPage.openIndexPage();
         indexPage.login(UserEnum.PITER_CHAILOVSKII.login, UserEnum.PITER_CHAILOVSKII.password);
 
-        //Assert User name in the left-top side of screen
+        //2 Assert User name in the left-top side of screen
         indexPage.checkLoggedUserName(UserEnum.PITER_CHAILOVSKII.name);
 
-        //Assert that there are 4 images on the Home Page
+        //3 Assert that there are 4 images on the Home Page
         indexPage.checkImages();
 
-        //Assert that there are 4 texts on the Home Page
+        //4 Assert that there are 4 texts on the Home Page
         indexPage.checkTextsUnderImages();
 
-        //Assert the main header
+        //5 Assert the main header
         indexPage.checkMainHeader(PageTextEnum.HOME_PAGE.mainHeader);
 
-        //Assert the main text
+        //6 Assert the main text
         indexPage.checkMainText();
 
-        //Click on "Service" subcategory in the header and check that drop down contains options
-        HeaderMenuTab menu = page(HeaderMenuTab.class);
+        //7 Click on "Service" subcategory in the header and check that drop down contains options
         menu.selectServiceDropdown();
         menu.checkServiceDropdown();
 
-        //Open through the header menu Service -> Different Elements Page
+        //8 Open through the header menu Service -> Different Elements Page
         menu.openDifferentElementsPage();
 
-        //Check interface on Service page, it contains all needed elements
-        DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
-        differentElementsPage.checkDifferentElementsPage(4, 4);
+        //9 Check interface on Service page, it contains all needed elements
+        differentElementsPage.checkDifferentElementsPage();
 
-        //Select and assert checkboxes
-        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Water.toString());
-        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Wind.toString());
+        //10 Select and assert checkboxes
+        differentElementsPage.selectCheckbox(ElementsCheckboxEnum.Water);
+        differentElementsPage.selectCheckbox(ElementsCheckboxEnum.Wind);
 
-        //Select radio
-        differentElementsPage.selectRadiobuttons(MetalEnum.Selen.toString());
+        //11 Select radio
+        differentElementsPage.selectRadiobutton(MetalEnum.Selen);
 
-        //Select in dropdown
-        differentElementsPage.selectDropdown(ColorEnum.Yellow.toString());
+        //12 Select in dropdown
+        differentElementsPage.selectDropdown(ColorEnum.Yellow);
 
-        //Check in logs section selected values and status
-        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), "true");
-        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), "true");
+        //13 Check in logs section selected values and status
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), true);
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), true);
         differentElementsPage.checkLogsSection("metal", MetalEnum.Selen.toString());
         differentElementsPage.checkLogsSection("Colors", ColorEnum.Yellow.toString());
 
-        //Unselect checkboxes
-        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Water.toString());
-        differentElementsPage.selectCheckboxes(ElementsCheckboxEnum.Wind.toString());
+        //14 Unselect checkboxes
+        differentElementsPage.selectCheckbox(ElementsCheckboxEnum.Water);
+        differentElementsPage.selectCheckbox(ElementsCheckboxEnum.Wind);
 
-        //Check in logs section unselected values and status (true|false)
-        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), "false");
-        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), "false");
+        //15 Check in logs section unselected values and status (true|false)
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Water.toString(), false);
+        differentElementsPage.checkLogsSection(ElementsCheckboxEnum.Wind.toString(), false);
     }
 
     @Test
     public void datesPageTest() {
-        //Perform login
+        //1 Perform login
+        indexPage.openIndexPage();
         indexPage.login(UserEnum.PITER_CHAILOVSKII.login, UserEnum.PITER_CHAILOVSKII.password);
 
-        //Assert User name in the left-top side of screen
+        //2 Assert User name in the left-top side of screen
         indexPage.checkLoggedUserName(UserEnum.PITER_CHAILOVSKII.name);
 
-        //Open Service -> Dates
-        HeaderMenuTab menu = page(HeaderMenuTab.class);
+        //3 Open Service -> Dates
         menu.selectServiceDropdown();
         menu.openDatesPage();
 
-        //Using drag-and-drop set Range sliders
-        DatesPage datesPage = page(DatesPage.class);
+        //4 Using drag-and-drop set Range sliders
         datesPage.changeRange(0, 100);
         datesPage.changeRange(0, 0);
         datesPage.changeRange(30, 70);

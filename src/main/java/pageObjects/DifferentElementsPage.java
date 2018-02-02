@@ -2,6 +2,9 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.ColorEnum;
+import enums.ElementsCheckboxEnum;
+import enums.MetalEnum;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -29,12 +32,12 @@ public class DifferentElementsPage {
     @FindBy(css = ".panel-body-list.results")
     private ElementsCollection result;
 
-    public void checkNumberOfCheckboxes(int checkboxNumber) {
-        checkbox.shouldHaveSize(checkboxNumber);
+    public void checkNumberOfCheckboxes() {
+        checkbox.shouldHaveSize(4);
     }
 
-    public void checkNumberOfRadiobuttons(int radiobtnNumber) {
-        metalRadiobuttons.shouldHaveSize(radiobtnNumber);
+    public void checkNumberOfRadiobuttons() {
+        metalRadiobuttons.shouldHaveSize(4);
     }
 
     public void checkButtons() {
@@ -42,18 +45,18 @@ public class DifferentElementsPage {
         defaultButton.should(visible);
     }
 
-    public void selectCheckboxes(String element) {
-        checkbox.stream().filter(item -> item.getText().equals(element))
+    public void selectCheckbox(ElementsCheckboxEnum element) {
+        checkbox.stream().filter(item -> item.getText().equals(element.toString()))
                 .forEach(item -> item.click());
     }
 
-    public void selectRadiobuttons(String metal) {
-        metalRadiobuttons.stream().filter(item -> item.getText().equals(metal))
+    public void selectRadiobutton(MetalEnum metal) {
+        metalRadiobuttons.stream().filter(item -> item.getText().equals(metal.toString()))
                 .forEach(item -> item.click());
     }
 
-    public void selectDropdown(String option) {
-        colorsDropdown.selectOption(option);
+    public void selectDropdown(ColorEnum option) {
+        colorsDropdown.selectOption(option.toString());
     }
 
     public void checkLogsSection(String name, String condition) {
@@ -61,9 +64,14 @@ public class DifferentElementsPage {
         assertTrue(log.stream().anyMatch(row -> row.getText().matches(regex)));
     }
 
-    public void checkDifferentElementsPage(int checkboxNumber, int radiobtnNumber) {
-        checkNumberOfCheckboxes(checkboxNumber);
-        checkNumberOfRadiobuttons(radiobtnNumber);
+    public void checkLogsSection(String name, Boolean condition) {
+        String regex = String.format(".* %s: .* %s", name, condition);
+        assertTrue(log.stream().anyMatch(row -> row.getText().matches(regex)));
+    }
+
+    public void checkDifferentElementsPage() {
+        checkNumberOfCheckboxes();
+        checkNumberOfRadiobuttons();
         checkButtons();
     }
 }

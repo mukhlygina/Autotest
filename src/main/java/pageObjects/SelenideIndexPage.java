@@ -9,6 +9,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.open;
 import static org.testng.Assert.assertEquals;
 
 public class SelenideIndexPage {
@@ -38,6 +39,11 @@ public class SelenideIndexPage {
 
     @FindBy(css = ".main-txt.text-center")
     private SelenideElement mainText;
+
+    @Step
+    public void openIndexPage() {
+        open("https://jdi-framework.github.io/tests");
+    }
 
     @Step
     public void login(String name, String password) {
