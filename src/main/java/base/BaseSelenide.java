@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeSuite;
 
 public abstract class BaseSelenide {
 
+    // COMMENT
     @BeforeSuite
     public void setUp() {
         Configuration.browser = "chrome";
