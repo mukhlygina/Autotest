@@ -114,9 +114,16 @@ public class SelenidePageObjectsTest {
         menu.selectServiceDropdown();
         menu.openDatesPage();
 
-        //4 Using drag-and-drop set Range sliders
+        //4 Using drag-and-drop set Range sliders MAX range
         datesPage.changeRange(0, 100);
+
+        //5  Using drag-and-drop set Range sliders MIN range
         datesPage.changeRange(0, 0);
+
+        //6  Using drag-and-drop set Range sliders MIN range
+        datesPage.changeRange(100, 100);
+
+        //7  Using drag-and-drop set Range sliders range (30, 70)
         datesPage.changeRange(30, 70);
     }
 }
